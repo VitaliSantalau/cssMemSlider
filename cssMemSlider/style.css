@@ -16,7 +16,7 @@ body {
   align-items: center;
   height: 100%;
   font-size: 1.6rem;
-  background-color: darkslategrey;
+  background-color: rgb(40, 50, 50);
 }
 
 .container {
@@ -30,10 +30,10 @@ body {
     "slides slides"
     "labels controls";
   grid-template-columns: 1fr 25%;
-  grid-template-rows: 1fr 15%;
-  gap: 2rem;
+  grid-template-rows: 1fr 5%;
+  gap: 3rem;
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
 
 [type="radio"] {
@@ -45,6 +45,8 @@ body {
   display: flex;
   width: 100%;
   overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .slide {
@@ -84,18 +86,9 @@ body {
   background-image: url("./assets/1.webp");
 }
 
-[type="radio"]:nth-of-type(1):checked ~ .slides > .slide--1 {
-  flex: 100%;
-}
-
-[type="radio"]:nth-of-type(2):checked ~ .slides > .slide--2 {
-  flex: 100%;
-}
-
-[type="radio"]:nth-of-type(3):checked ~ .slides > .slide--3 {
-  flex: 100%;
-}
-
+[type="radio"]:nth-of-type(1):checked ~ .slides > .slide--1,
+[type="radio"]:nth-of-type(2):checked ~ .slides > .slide--2,
+[type="radio"]:nth-of-type(3):checked ~ .slides > .slide--3,
 [type="radio"]:nth-of-type(4):checked ~ .slides > .slide--4 {
   flex: 100%;
 }
@@ -114,30 +107,14 @@ body {
   flex: 0;
 }
 
-[type="radio"]:nth-of-type(1):checked ~ .labels > .label--1 {
-  flex: 100%;
-  display: block;
-  animation: scale 1s ease-in-out;
-}
-
-[type="radio"]:nth-of-type(2):checked ~ .labels > .label--2 {
-  flex: 100%;
-  display: block;
-  animation: scale 1s ease-in-out;
-}
-
-[type="radio"]:nth-of-type(3):checked ~ .labels > .label--3 {
-  flex: 100%;
-  display: block;
-  animation: scale 1s ease-in-out;
-}
-
+[type="radio"]:nth-of-type(1):checked ~ .labels > .label--1,
+[type="radio"]:nth-of-type(2):checked ~ .labels > .label--2,
+[type="radio"]:nth-of-type(3):checked ~ .labels > .label--3,
 [type="radio"]:nth-of-type(4):checked ~ .labels > .label--4 {
   flex: 100%;
   display: block;
   animation: scale 1s ease-in-out;
 }
-
 
 .controls {
   grid-area: controls;
@@ -158,7 +135,26 @@ body {
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 50%;
-  background-color: aqua;
+  background-color: #127391;
+}
+
+.control:hover > .inner--control {
+  background-color: #ffffff;
+}
+
+[type="radio"]:nth-of-type(1):checked ~ .controls > .control--1 > .inner--control,
+[type="radio"]:nth-of-type(2):checked ~ .controls > .control--2 > .inner--control,
+[type="radio"]:nth-of-type(3):checked ~ .controls > .control--3 > .inner--control,
+[type="radio"]:nth-of-type(4):checked ~ .controls > .control--4 > .inner--control {
+  background-color: transparent;
+  border: 2px solid #127391;
+}
+
+[type="radio"]:nth-of-type(1):checked ~ .controls > .control--1:hover > .inner--control,
+[type="radio"]:nth-of-type(2):checked ~ .controls > .control--2:hover > .inner--control,
+[type="radio"]:nth-of-type(3):checked ~ .controls > .control--3:hover > .inner--control,
+[type="radio"]:nth-of-type(4):checked ~ .controls > .control--4:hover > .inner--control {
+  border-color: #ffffff;
 }
 
 @keyframes scale {
@@ -170,4 +166,43 @@ body {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+@media (max-width: 1500px) {
+  .slide {
+    background-size: contain;
+  }
+}
+
+@media (max-width: 1300px) {
+  .container {
+    width: 95%;
+  }
+
+  .slider {
+    grid-template-areas: 
+      "slides"
+      "controls"
+      "labels";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5% 15%;
+  }
+
+  .slide {
+    background-size: cover;
+  }
+
+  .labels {
+    font-size: 2rem;
+  }
+
+  .controls {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 800px) {
+  .slider {
+    grid-template-rows: 50% 5% 1fr;
+  } 
 }

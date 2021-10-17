@@ -1,0 +1,212 @@
+*
+ {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+  font-size: 62.5%; /* 16px * 62.5% = 10px = 1rem */;
+} 
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.6rem;
+  background-color: rgb(40, 50, 50);
+}
+
+.container {
+  width: 80%;
+  height: 90vh;
+}
+
+.slider {
+  display: grid;
+  grid-template-areas: 
+    "slides slides"
+    "labels controls";
+  grid-template-columns: 1fr 25%;
+  grid-template-rows: 1fr 5%;
+  gap: 3rem;
+  width: 100%;
+  height: 90%;
+}
+
+[type="radio"] {
+  display: none;
+}
+
+.slides {
+  grid-area: slides;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  transition: all 1s ease-in-out;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.labels {
+  grid-area: labels;
+  display: flex;
+  font-size: 3rem;
+  overflow: hidden;
+  color: white;
+}
+
+.slide--1 {
+  flex: 0;
+  background-image: url("./assets/3.webp");
+}
+
+.slide--2 {
+  flex: 0;
+  background-image: url("./assets/2.webp");
+}
+
+.slide--3 {
+  flex: 0;
+  background-image: url("./assets/4.webp");
+}
+
+.slide--4 {
+  flex: 0;
+  background-image: url("./assets/1.webp");
+}
+
+[type="radio"]:nth-of-type(1):checked ~ .slides > .slide--1,
+[type="radio"]:nth-of-type(2):checked ~ .slides > .slide--2,
+[type="radio"]:nth-of-type(3):checked ~ .slides > .slide--3,
+[type="radio"]:nth-of-type(4):checked ~ .slides > .slide--4 {
+  flex: 100%;
+}
+
+.label {
+  display: none;
+  width: 100%;
+  height: 100%;
+  transition: all 1s ease-in-out;
+}
+
+.label--1,
+.label--2,
+.label--3,
+.label--4 {
+  flex: 0;
+}
+
+[type="radio"]:nth-of-type(1):checked ~ .labels > .label--1,
+[type="radio"]:nth-of-type(2):checked ~ .labels > .label--2,
+[type="radio"]:nth-of-type(3):checked ~ .labels > .label--3,
+[type="radio"]:nth-of-type(4):checked ~ .labels > .label--4 {
+  flex: 100%;
+  display: block;
+  animation: scale 1s ease-in-out;
+}
+
+.controls {
+  grid-area: controls;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 10px;
+}
+
+.control {
+  display: block;
+  height: 3rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.inner--control {
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background-color: #127391;
+}
+
+.control:hover > .inner--control {
+  background-color: #ffffff;
+}
+
+.control:active > .inner--control {
+  background-color: #ff0000;
+}
+
+[type="radio"]:nth-of-type(1):checked ~ .controls > .control--1 > .inner--control,
+[type="radio"]:nth-of-type(2):checked ~ .controls > .control--2 > .inner--control,
+[type="radio"]:nth-of-type(3):checked ~ .controls > .control--3 > .inner--control,
+[type="radio"]:nth-of-type(4):checked ~ .controls > .control--4 > .inner--control {
+  background-color: transparent;
+  border: 2px solid #127391;
+}
+
+[type="radio"]:nth-of-type(1):checked ~ .controls > .control--1:hover > .inner--control,
+[type="radio"]:nth-of-type(2):checked ~ .controls > .control--2:hover > .inner--control,
+[type="radio"]:nth-of-type(3):checked ~ .controls > .control--3:hover > .inner--control,
+[type="radio"]:nth-of-type(4):checked ~ .controls > .control--4:hover > .inner--control {
+  border-color: #ffffff;
+}
+
+@keyframes scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1500px) {
+  .slide {
+    background-size: contain;
+  }
+}
+
+@media (max-width: 1300px) {
+  .container {
+    width: 95%;
+  }
+
+  .slider {
+    grid-template-areas: 
+      "slides"
+      "controls"
+      "labels";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5% 15%;
+  }
+
+  .slide {
+    background-size: cover;
+  }
+
+  .labels {
+    font-size: 2rem;
+  }
+
+  .controls {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 800px) {
+  .slider {
+    grid-template-rows: 50% 5% 1fr;
+  } 
+}
